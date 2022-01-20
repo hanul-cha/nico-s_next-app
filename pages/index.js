@@ -1,13 +1,15 @@
-import { useState } from "react"
-import NavBar from "../components/NavBar";
+import Head from "next/head";
+import { useState } from "react";
 
 export default function Home() {
   const [count, setCount] = useState(0);
   return (
     <div>
-      <NavBar />
+      <Head>
+        <title>Home | Next Movies</title>
+      </Head>
       <h1>Hello {count}</h1>
-      <button onClick={() => setCount((prev) =>prev+1)}>+</button>
+      <button onClick={() => setCount((prev) => prev + 1)}>+</button>
     </div>
-  )
+  );
 }
