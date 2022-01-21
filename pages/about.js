@@ -1,11 +1,10 @@
 import Head from "next/head";
+import GlobalTitle from "../components/GlobalTitle";
 
 export default function about() {
   return (
     <div>
-      <Head>
-        <title>About | Next Movies</title>
-      </Head>
+      <GlobalTitle title="About" />
       <h1>about</h1>
     </div>
   );
