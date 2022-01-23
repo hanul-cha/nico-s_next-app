@@ -3,26 +3,13 @@ import GlobalTitle from "../components/GlobalTitle";
 
 const API_KEY = "6015bc027aef1e97c5ae0ffbd8d1b85b"
 
-export default function Home() {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const { results } = await (
-        await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)
-      ).json();
-      setMovies(results)
-    })()//익명 함수(즉시실행함수) : 즉시실행이 필요할때 사용
-    
-  }, [])
-  console.log(movies)
+export default function Home({ results }) {
+  
+  
   return (
     <div className="container">
       <GlobalTitle title="Home" />
-      {!movies &&
-        <h4>loading...</h4>
-      }
-      {movies.map((movie) => (
+      {results?.map((movie) => (
         <div key={movie.id} className="movie">
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
           <h4>{movie.original_title}</h4>
@@ -54,4 +41,13 @@ export default function Home() {
       `}</style>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const { results } = await (await fetch('http://localhost:3000//api/movies')).json();
+  return {
+    props: {
+      results,
+    }
+  }
 }
